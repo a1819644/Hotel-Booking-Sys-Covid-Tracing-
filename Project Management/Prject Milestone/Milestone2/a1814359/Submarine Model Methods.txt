@@ -1,0 +1,70 @@
+Resources: Users, Hotels, Rooms, Bookings
+
+Model data and types are described below:
+User {
+  id: ObjectId,
+  name: String,
+  email: String,
+  password: String,
+  phone: String
+  
+}
+
+Hotel {
+  id: ObjectId,
+  name: String,
+  email: String,
+  address: String,
+  phone: String,
+  rating: Number,
+  reviews: Array[String]
+}
+
+Room {
+  price: Number,
+  beds: Number,
+  bookedDates: Array[Date],
+  breakfast: Boolean,
+  amenities: Array[String],
+  reservedDates: Array[Date]
+}
+
+Booking {
+  userId: ObjectId,
+  roomId: ObjectId,
+  days: Array[Date],
+  total: Number,
+  notes: String
+}
+
+Service classes can be used to abstract queries and reduce complexity:
+UserService:
+  getUsers()
+  getUserById(userId: String)
+  getUserCredentials(userId: String)
+  createUser(data: Object)
+  updateUser(userId: String, data: Object)
+  deleteUser(userId: String)
+
+HotelService:
+  getHotels()
+  getHotelById(hotelId: String)
+  createHotel(data: Object)
+  updateHotel(hotelId: String, data: Object)
+  deleteHotel(hotelId: String)
+
+RoomService:
+  getRooms()
+  getHotelRooms(hotelId: String)
+  getRoomById(roomId: String)
+  createRoom(data: Object)
+  updateRoom(roomId: String, data: Object)
+  deleteRoom(roomId: String)
+  checkAvailability(roomId: String, dates: Array[Date])
+
+BookingService:
+  getBookings()
+  getCustomerBookings(customerId: String)
+  getBookingById(bookingId: String)
+  createBooking(data: Object)
+  updateBooking(bookingId: String, data: Object)
